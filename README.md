@@ -10,6 +10,15 @@ The app is split into two layers:
 
 **Native C++ layer** (`native-lib.cpp`) wraps `llama.cpp` behind two JNI entry points: one to load the GGUF model into memory at startup, and one to run inference. The translation function tokenizes a Llama 3 Instruct-format prompt, decodes it with greedy sampling, and calls back into Kotlin for each generated token. A mutex serializes concurrent translation requests. ARM NEON SIMD is enabled at the build level for vectorized matrix math on mobile processors.
 
+## Models
+
+| Task | Model | Format | Source |
+|------|-------|--------|--------|
+| Speech-to-Text | Android SpeechRecognizer (Google STT engine) | Built-in OS service | Ships with Android / Google app |
+| Translation | Meta Llama 3.2 1B Instruct | GGUF (Q4_K_M quantization) | [HuggingFace](https://huggingface.co/bartowski/Llama-3.2-1B-Instruct-GGUF) |
+
+The app does not bundle any model files. The Llama GGUF file must be downloaded separately and placed on the device before first launch.
+
 ## Prerequisites
 
 - Android Studio with NDK and CMake support
