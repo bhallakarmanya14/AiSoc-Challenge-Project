@@ -47,8 +47,6 @@ target_compile_definitions(myapplication PRIVATE
 target_compile_options(myapplication PRIVATE
     -O3
     -ffast-math
-    -march=armv8-a+simd
-    -mfpu=neon
 )
 
 # --- Link To Android Libraries ---
